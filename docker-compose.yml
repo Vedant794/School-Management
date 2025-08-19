@@ -1,0 +1,27 @@
+services:
+  db:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: Vnk.@794
+      MYSQL_DATABASE: school_db
+    ports:
+      - "3307:3306"
+    volumes:
+      - dbdata:/var/lib/mysql
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
+  api:
+    build: .
+    environment:
+      PORT: 3000
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_USER: root
+      DB_PASSWORD: Vnk.@794
+      DB_NAME: school_db
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    command: sh -c "sleep 15 && npm start"
+volumes:
+  dbdata:

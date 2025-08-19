@@ -1,0 +1,79 @@
+{
+  "info": {
+    "name": "School Management API",
+    "_postman_id": "c2b7f7e0-2c3e-4a8e-9b6b-0a2af5a0abcd",
+    "description": "Add schools and list schools sorted by proximity.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Add School",
+      "request": {
+        "method": "POST",
+        "header": [
+          {
+            "key": "Content-Type",
+            "value": "application/json"
+          }
+        ],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"name\": \"Greenfield High\",\n  \"address\": \"12 Park St, City A\",\n  \"latitude\": 19.076,\n  \"longitude\": 72.8777\n}"
+        },
+        "url": {
+          "raw": "{{baseUrl}}/addSchool",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "addSchool"
+          ]
+        },
+        "description": "Creates a school after validating the payload."
+      },
+      "response": []
+    },
+    {
+      "name": "List Schools (by proximity)",
+      "request": {
+        "method": "GET",
+        "url": {
+          "raw": "{{baseUrl}}/listSchools?lat={{lat}}&lng={{lng}}",
+          "host": [
+            "{{baseUrl}}"
+          ],
+          "path": [
+            "listSchools"
+          ],
+          "query": [
+            {
+              "key": "lat",
+              "value": "{{lat}}"
+            },
+            {
+              "key": "lng",
+              "value": "{{lng}}"
+            }
+          ]
+        },
+        "description": "Returns all schools sorted by distance, includes distance_km in response."
+      },
+      "response": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000"
+    },
+    {
+      "key": "lat",
+      "value": "19.0760"
+    },
+    {
+      "key": "lng",
+      "value": "72.8777"
+    }
+  ]
+}
